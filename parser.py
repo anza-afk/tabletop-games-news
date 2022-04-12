@@ -62,4 +62,3 @@ if __name__ == '__main__':
     with requests.Session() as requests_session:
         with Session() as db_session:
             get_news(db_session, [get_one_news(get_html(link, requests_session)) for link in get_game_links(get_html(url, requests_session))])
-    

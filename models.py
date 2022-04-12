@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, DateTime
-from database import Base, engine
+from database import Base
 
 
 class News(Base):
@@ -13,7 +13,14 @@ class News(Base):
     image = Column(String, nullable=True)
 
     def json(self):
-        return {"title":self.title, "author":self.author, "published":str(self.published), "content":self.content, "image":self.image,}
+        return {
+            "id":str(self.id),
+            "title":self.title,
+            "author":self.author,
+            "published":str(self.published),
+            "content":self.content,
+            "image":self.image,
+        }
 
     def __repr__(self):
         return '<News {}>'.format(self.title)

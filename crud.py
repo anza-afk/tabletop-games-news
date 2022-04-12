@@ -1,5 +1,6 @@
 from models import News
 
+
 def save_news(session, title, author, published, content, image):
     new_news = News(
         title=title,
@@ -17,9 +18,8 @@ def save_news(session, title, author, published, content, image):
 
 def get_news(session, news_list):
     """
-    Выполнять по расписанию - 
+    Выполнять по расписанию -
     парсер новостей и запись их в дб
     """
     for news in news_list:
         save_news(session, *news.values())
-    
