@@ -31,6 +31,4 @@ api.add_resource(NewsList,'/news/')
 
 app.debug = True
 if __name__ == '__main__':
-    with Session() as session:
-        get_news(session, result_news)
     app.run(host='localhost', port=5001)
