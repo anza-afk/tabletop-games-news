@@ -3,9 +3,6 @@ from flask_restful import Api, Resource, reqparse
 from models import News
 from database import Session, migrate
 
-from crud import get_news
-from parser import result_news
-
 
 def create_app(create_db=True):
     app = Flask(__name__)
