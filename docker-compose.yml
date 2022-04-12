@@ -16,6 +16,18 @@ services:
       db:
         condition: service_healthy
 
+  parser:
+    restart: 'no'
+    build:
+      context: .
+    env_file: .env
+    volumes:
+      - .:/news
+    depends_on: 
+      db:
+        condition: service_healthy
+    command: python parser.py
+  
   db:
     image: postgres:14-alpine
     env_file: .env
