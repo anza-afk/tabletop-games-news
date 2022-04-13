@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from datetime import datetime
+from crud import get_news
 import requests
 import re
 
@@ -54,13 +55,13 @@ def get_one_news(html: str) -> dict:
         news_data = []
     return news_data
 
-def save_news(db_session, requests_session):
+
+def news_to_db(db_session, requests_session):
     get_news(db_session, [get_one_news(get_html(link, requests_session)) for link in get_game_links(get_html(URL, requests_session))])
 
 if __name__ == '__main__':
     from database import Session, migrate
-    from crud import get_news
     migrate()
     with requests.Session() as requests_session:
         with Session() as db_session:
-            save_news(db_session, requests_session)
+            news_to_db(db_session, requests_session)
