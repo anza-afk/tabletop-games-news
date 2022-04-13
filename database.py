@@ -19,6 +19,7 @@ POSTGRES_USER = os.environ.get('POSTGRES_USER')
 engine = create_engine(
     f'postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}', echo=True
 )
+
 Session = scoped_session(sessionmaker(bind=engine))
 Base = declarative_base()
 
