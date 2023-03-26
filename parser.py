@@ -4,7 +4,10 @@ from crud import get_news
 import requests
 import re
 
-URL = 'https://www.bgeek.ru/category/%d0%bd%d0%b0%d1%81%d1%82%d0%be%d0%bb%d1%8c%d0%bd%d1%8b%d0%b5-%d0%b8%d0%b3%d1%80%d1%8b/'
+URL = """https://www.bgeek.ru/category/
+%d0%bd%d0%b0%d1%81%d1%82%d0%be%d0%bb%d1
+%8c%d0%bd%d1%8b%d0%b5-%d0%b8%d0%b3%d1%80%d1%8b/"""
+
 
 def get_html(url:str, session:requests.Session) -> str:
     headers = {
@@ -57,7 +60,10 @@ def get_one_news(html: str) -> dict:
 
 
 def news_to_db(db_session, requests_session):
-    get_news(db_session, [get_one_news(get_html(link, requests_session)) for link in get_game_links(get_html(URL, requests_session))])
+    get_news(db_session, [get_one_news(
+        get_html(link, requests_session)) for link in get_game_links(
+            get_html(URL, requests_session))])
+
 
 if __name__ == '__main__':
     from database import Session, migrate
